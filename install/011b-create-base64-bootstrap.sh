@@ -1,6 +1,7 @@
 echo "Copying the bootstrap.ign to the $helper server.."
 sudo cp ${OCP_DIR}/bootstrap.ign /var/www/html
 sudo chmod 644 /var/www/html/bootstrap.ign 
+sudo ls -l /var/www/html/bootstrap.ign
 
 echo "Create the append-boottrap.ign.."
 
@@ -27,4 +28,6 @@ END
 
 cat $HOME/append-bootstrap.ign
 
+echo "Creating the based64-encoded append-bootstrap.."
 cat $HOME/append-bootstrap.ign | base64 -w0 > $HOME/append-bootstrap.64
+ls -l append-bootstrap*
