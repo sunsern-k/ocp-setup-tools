@@ -1,4 +1,4 @@
-if ! "$mtu" = "" ]
+if [ ! "$mtu" = "" ]
 then
   echo "Updating the mtu: $mtu -  ${OCP_DIR}/manifests/cluster-network-03.config.yaml"
 
