@@ -30,4 +30,4 @@ cat $HOME/append-bootstrap.ign
 
 echo "Creating the based64-encoded append-bootstrap.."
 cat $HOME/append-bootstrap.ign | base64 -w0 > $HOME/append-bootstrap.64
-ls -l append-bootstrap*
+ls -l $HOME/append-bootstrap*
