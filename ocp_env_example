@@ -27,6 +27,8 @@ podcidr="10.128.0.0/14"
 machinecidr="10.0.0.0/16"
 servicecidr="172.30.0.0/16"
 hostprefix="23"
+# Default it must be less 50 bytes than the MTU such as 1500 -> 1450 (default), 9000 -> 8950
+mtu="1450"
 
 
 pullsecret_file="__PULLSECERT_FILE__"

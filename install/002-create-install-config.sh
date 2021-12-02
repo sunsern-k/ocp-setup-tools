@@ -36,3 +36,11 @@ fips: false
 pullSecret: $(echo "'$(echo $pullsecret)'")
 sshKey: $(echo "'$(echo $ssh_public_key)'") 
 END
+
+if [ "$httpproxy" = "" ] || [ "$httpsproxy" = "" ]
+then 
+  echo "[Info]: Proxy configurations are not set..."
+  echo "[Info]: Remove proxy configurations from the $INSTALL_CONFIG"
+  sed -i '/proxy/d' $INSTALL_CONFIG
+  sed -i '/Proxy/d' $INSTALL_CONFIG
+fi
