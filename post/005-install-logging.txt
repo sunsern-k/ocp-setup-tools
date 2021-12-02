@@ -1,0 +1,22 @@
+# There are two operators: OpenShift Elasticsearch Operator and Red Hat OpenShift Logging Operator
+
+# OpenShift Elasticsearch Operator
+  - Operators -> OperatorHub
+  - Find "OpenShift Elasticsearch Operator" -> install
+  - Select Installation mode: "All anmespaces on the cluster" 
+  - Select "openshift-operators-redhat" - under Installed Namespace
+  - Select "Enable operator recommended cluster monitoring on this namespace"
+  - Select "stable-5.x"
+  - Select "Approval strategy" -> Automatic
+  - Click Install
+
+
+# Red Hat OpenShift Logging Operator
+  - Operators -> OperatorHub
+  - Find "Red Hat OpenShift Logging" -> install
+  - Select Installation mode: "A specific namespace on the cluster"
+  - Select Installed Namespace: "Operator recommended namespace" -> openshift-logging 
+  - Select Enable operator recommended cluster monitoring on this namespace
+  - Select "stable-5.x"
+  - Select "Approval strategy" -> Automatic
+  - Click Install

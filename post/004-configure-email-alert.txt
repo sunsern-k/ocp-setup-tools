@@ -1,0 +1,15 @@
+# Configuring alert receiver - email
+
+1) In the Administrator perspective, navigate to Administration → Cluster Settings → Configuration → Alertmanager.
+
+2) Select Create Receiver in the Receivers section of the page.
+
+3) In the Create Receiver form, add a Receiver Name and choose a Receiver Type from the list.
+
+For email receivers:
+- Add the email address to send notifications to.
+- Add SMTP configuration details, including the address to send notifications from, the smarthost and port number used for sending emails, the hostname of the SMTP server, and authentication details.
+- Choose whether TLS is required.
+- Select Show advanced configuration if you want to edit the default option not to send resolved alerts to the receiver or edit the body of email notifications configuration.
+
+

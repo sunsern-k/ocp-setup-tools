@@ -1,5 +1,4 @@
-Create the following configurations logging.yaml and then oc apply -f logging.yaml
----
+cat <<END >logging-config.yaml
 apiVersion: "logging.openshift.io/v1"
 kind: "ClusterLogging"
 metadata:
@@ -19,7 +18,7 @@ spec:
     elasticsearch:
       nodeCount: 3 
       nodeSelector:
-        node-role.kubernetes.io/logmon: ""
+        ${logmon_node_selector} 
       tolerations:
       - key: infra 
         value: reserved
@@ -28,11 +27,10 @@ spec:
         value: reserved
         effect: NoExecute  
       storage:
-        storageClassName: "ocs-storagecluster-ceph-rbd"
-        size: 300G
+        storageClassName: ${logging_storageclass}
+        size: ${logging_storage_size} 
       resources: 
         limits:
-          cpu: 500m
           memory: "16Gi"
         requests:
           cpu: 500m
@@ -47,9 +45,15 @@ spec:
   visualization:
     type: "kibana"  
     kibana:
+      resources: 
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi
       replicas: 1
       nodeSelector:
-        node-role.kubernetes.io/logmon: ""
+        ${logmon_node_selector}
       tolerations:
       - key: infra 
         value: reserved
@@ -63,4 +67,4 @@ spec:
       fluentd: 
         tolerations:
         - operator: "Exists"
-
+END

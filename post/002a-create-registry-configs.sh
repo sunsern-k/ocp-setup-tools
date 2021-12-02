@@ -1,12 +1,14 @@
+cat <<END > $registry_pvc_config
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: image-registry-storage 
   namespace: openshift-image-registry 
 spec:
-  storageClassName: openshift-storage.cephfs.csi.ceph.com
+  storageClassName: ${registry_storageclass}
   accessModes:
-  - ReadWriteMany
+  - ${registry_storage_mode}
   resources:
     requests:
-      storage: 100Gi
+      storage: ${registry_storage_size}
+END

@@ -1,0 +1,31 @@
+logmon_node_selector='node-role.kubernetes.io/logmon: ""'
+
+cluster_monitoring_config="cluster-monitoring-config.yaml"
+registry_pvc_config="registry-pvc-config.yaml"
+logging_config="logging-config.yaml"
+
+logging_storageclass="ocs-storagecluster-ceph-rbd"
+logging_storage_size="300Gi"
+
+alertmanager_storageclass="ocs-storagecluster-ceph-rbd"
+alertmanager_storage_size="5Gi"
+
+prometheusk8s_stroageclass="ocs-storagecluster-ceph-rbd"
+prometheusk8s_storage_size="400Gi"
+prometheusk8s_retention="7d"
+
+# user-workload-monitoring
+prometheus_stroageclass="ocs-storagecluster-ceph-rbd"
+prometheus_storage_size="100Gi"
+prometheus_retention="7d"
+
+# ReadWriteManage - using the cephfs
+registry_storageclass="openshift-storage.cephfs.csi.ceph.com"
+registry_storage_mode="ReadWriteMany"
+registry_storage_size="100Gi"
+
+export logmon_node_selector logmon_storageclass
+export cluster_monitoring_config alertmananager_storage_size prometheusk8s_storage_size
+export alertmanager_storageclass alertmanager_storage_size prometheusk8s_stroageclass prometheusk8s_storage_size prometheusk8s_retention
+export prometheus_stroageclass prometheus_storage_size prometheus_retention
+export registry_pvc_config registry_storageclass registry_storage_mode registry_storage_size
