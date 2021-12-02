@@ -34,7 +34,12 @@ pullsecret=$(cat $pullsecret_file)
 
 ssh_key_name="__sshkey_name__"
 ssh_public_key_file="$HOME/.ssh/${ssh_key_name}.pub"
-ssh_public_key=$(cat $ssh_public_key_file)
+if [ ! -f $ssh_public_key_file ]
+then
+  [ -f install/001-setup-sshkey.sh ] && install/001-setup-sshkey.sh
+else
+  ssh_public_key=$(cat $ssh_public_key_file)
+fi
 
 ntpserver="__NTP_SERVER__"
 

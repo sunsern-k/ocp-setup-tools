@@ -1,11 +1,12 @@
 echo "Expecting 200"
-curl -s -o /dev/null -w "%{http_code}\n" https://quay.io
-curl -s -o /dev/null -w "%{http_code}\n" https://console.redhat.com/openshift 
-curl -s -o /dev/null -w "%{http_code}\n" https://github.com
 
-VCENTER="https://$vcenter"
-curl -s -o /dev/null -w "%{http_code}\n" ${VCENTER}
+for url in 'quay.io' 'console.redhat.com/openshift' 'github.com' "${vcenter}"
+do
+  echo "Status code: $(curl -s -o /dev/null -w "%{http_code}\n" https://${url}) - https://$url"
+done
 
 echo "Expecting 301"
-curl -s -o /dev/null -w "%{http_code}\n" https://registry.connect.redhat.com
-curl -s -o /dev/null -w "%{http_code}\n" https://registry.redhat.io
+for url in 'registry.connect.redhat.com' 'registry.redhat.io'
+do
+  echo "Status code: $(curl -s -o /dev/null -w "%{http_code}\n" https://${url}) - https://$url"
+done
