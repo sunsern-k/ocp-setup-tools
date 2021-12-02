@@ -1,0 +1,18 @@
+# Install OpenShift Container Storage Operator from UI: 
+# Reference: https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage/4.8
+
+Procedure
+- Log in to OpenShift Web Console.
+- Click Operators → OperatorHub.
+- Search for OpenShift Container Storage from the list of operators and click on it.
+- Click Install.
+- Set the following options on the Install Operator page:
+  - Channel as stable-4.8.
+  - Installation Mode as A specific namespace on the cluster.
+  - Installed Namespace as Operator recommended namespace openshift-storage. If Namespace openshift-storage does not exist, it will be created during the operator installation.
+  - Approval Strategy as Automatic or Manual.
+  - Click Install.
+
+NOTE:
+- If you select Automatic updates, the Operator Lifecycle Manager (OLM) automatically upgrades the running instance of your operator without any intervention.
+- If you select Manual updates, the OLM creates an update request. As a cluster administrator, you must then manually approve that update request to have the operator updated to the new version.

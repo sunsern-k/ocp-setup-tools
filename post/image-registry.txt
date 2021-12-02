@@ -1,0 +1,47 @@
+# Post installation - update and configure Image Registry
+
+**NOTE: It should be done after ODF setup**
+
+**1) - Verify that no any registry pods running**
+
+```
+oc get pods -n openshift-image-registry
+NAME                                               READY   STATUS    RESTARTS   AGE
+cluster-image-registry-operator-76bd7bdf95-hqk9p   1/1     Running   2          88m
+node-ca-5m6sx                                      1/1     Running   1          78m
+node-ca-fq7dt                                      1/1     Running   0          64m
+node-ca-hv4gp                                      1/1     Running   0          78m
+node-ca-jrcf4                                      1/1     Running   0          64m
+node-ca-zfw6h                                      1/1     Running   0          78m
+```
+
+**2) - Edit storage to claim PVC**
+
+```
+oc edit configs.imageregistry.operator.openshift.io
+
+# Update from 
+storage: {}
+storageManaged: false
+
+# To
+storage:
+  pvc:
+    claim:
+
+
+## Move image-registry pods to dedicated nodes
+
+**Patch `configs.imageregistry.operator.openshift.io/cluster` with the infra-specific node**
+# Adjust the node lables as appropriate 
+```
+oc patch configs.imageregistry.operator.openshift.io/cluster --type=merge -p '{"spec":{"nodeSelector": {"node-role.kubernetes.io/infra-int": ""},"tolerations": [{"effect":"NoSchedule","key": "infra","value": "reserved"},{"effect":"NoExecute","key": "infra","value": "reserved"}]}}'
+```
+
+**It could be patched only `replica`; for example, from 2 to 3 if required 3 replica .**  
+
+oc patch ingresscontroller/default -n openshift-ingress-operator --type=merge -p '{"spec":{"replicas": 3}}'
+
+
+Reference: 
+  - https://access.redhat.com/solutions/5034771

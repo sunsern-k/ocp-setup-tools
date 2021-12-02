@@ -1,0 +1,57 @@
+# Infra - ACM/Quay - infra-mgt
+for node in infra0
+do
+  for i in {1..3}
+  do
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra-mgt=
+  done
+done
+
+# Infra - Loging/Monitoring - logmon
+for node in log0
+do
+  for i in {1..3}
+  do
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/logmon=
+  done
+done
+
+# Infra - router/registry - infra-int
+# Adjust the node number as appropriate
+# This example is assume to have infra04 and infra05 to be the infra nodes of routers/registry
+for node in infra0
+do
+  for i in {4..5}
+  do
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra-int=
+  done
+done
+
+# ODF - storage
+for node in odf0
+do
+  for i in {1..3}
+  do
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
+    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/storage=
+    oc label node ${node}${i}.${OCP_DOMAIN} cluster.ocs.openshift.io/openshift-storage=
+  done
+done
+
+# Set taint configurations 
+oc adm taint nodes -l node-role.kubernetes.io/infra-mgt infra=reserved:NoSchedule infra=reserved:NoExecute
+oc adm taint nodes -l node-role.kubernetes.io/infra-int infra=reserved:NoSchedule infra=reserved:NoExecute
+oc adm taint nodes -l node-role.kubernetes.io/logmon infra=reserved:NoSchedule infra=reserved:NoExecute
+
+# Set taint only for ODF nodes
+# ODF - https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage/4.8/html/managing_and_allocating_storage_resources/how-to-use-dedicated-worker-nodes-for-openshift-container-storage_rhocs
+
+oc adm taint nodes -l node-role.kubernetes.io/storage node.ocs.openshift.io/storage="true":NoSchedule 
+
+
+
+
+

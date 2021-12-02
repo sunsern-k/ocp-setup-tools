@@ -1,0 +1,64 @@
+# Environment variables to be used by other scripts
+dnsserver="__DNSSERVER__"
+basedomain="__BASEDOMAIN__"
+clustername="__CLUSTERNAME__"
+workercount="__WORKERCOUNT__"
+vcenter="__VCENTER__"
+vcenteruser="__VCENTERUSER__"
+vcenterpassword="__VCENTERPASSWORD__"
+vcenterdatacenter="__VCENTERDATACENTER__"
+vcenterhost="__VCENTERHOST__"
+vcenterdatastore="__VCENTERDATASTORE__"
+vcenterfolder="__VCENTERFOLDER__"
+#
+helper="__helper_IP_ADDRESS__"
+bastion_host="__bastion_hostname__"
+
+ocpmajorversion="4.9"
+ocpversion="4.9.7"
+
+#proxy
+httpproxy="__http_proxy__"
+httpsproxy="__https_proxy__"
+noproxy="__no_proxy__"
+
+# Default ones - updated as needed
+podcidr="10.128.0.0/14"
+machinecidr="10.0.0.0/16"
+servicecidr="172.30.0.0/16"
+hostprefix="23"
+
+
+pullsecret_file="__PULLSECERT_FILE__"
+pullsecret=$(cat $pullsecret_file)
+
+ssh_key_name="__sshkey_name__"
+ssh_public_key_file="$HOME/.ssh/${ssh_key_name}.pub"
+ssh_public_key=$(cat $ssh_public_key_file)
+
+ntpserver="__NTP_SERVER__"
+
+
+export dnsserver basedomain clustername workercount 
+export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore helper bastion_host
+export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix
+export httpproxy httpsproxy noproxy 
+export pullsecret ssh_public_key
+
+
+export GOVC_URL="https://$vcenter"
+export GOVC_USERNAME="${vcenteruser}"
+export GOVC_PASSWORD="${vcenterpassword}"
+export GOVC_INSECURE=true
+export GOVC_DATACENTER="${vcenterdatacenter}"
+export GOVC_FOLDER="${vcenterfolder}"
+
+export OCP_DIR=~/$clustername
+[ ! -d $OCP_DIR ] && mkdir -p $OCP_DIR
+
+export OCP_BACKUP=~/backup/${OCP_DIR}
+[ ! -d ${OCP_BACKUP} ] && mkdir -p $OCP_BACKUP
+
+export OCP_DOMAIN="${clustername}.${basedomain}"
+export HTTP_HOST=$helper
+export INSTALL_CONFIG="${OCP_DIR}/install-config.yaml"
