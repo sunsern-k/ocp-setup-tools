@@ -50,9 +50,9 @@ ntpserver="__NTP_SERVER__"
 
 export dnsserver basedomain clustername workercount 
 export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastion_host
-export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver:q
+export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix mtu
 export httpproxy httpsproxy noproxy 
-export pullsecret
+export pullsecret_file pullsecret 
 
 
 export GOVC_URL="https://$vcenter"
