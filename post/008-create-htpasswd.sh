@@ -1,6 +1,7 @@
 # Update a list of users in the htpasswd_env
 
-# It accepts the first parameter as a list of users
+# It accepts the first parameter as a file containing a list of users
+# The example of a file is htpasswd_users.example
 htpasswd_user_input=$1
 
 # A htpasswd file to be created as a secret in OpenShift
@@ -12,6 +13,7 @@ oauth_config="htpasswd-local.yaml"
 # If the parameter is passed for the htpasswd file then overide the default "http_env" file
 if [ "$htpasswd_user_input" = "" ]
 then
+  # If do not supply another file, the default htpasswd_users are used
   htpasswd_source="htpasswd_users"
 else
   htpasswd_source="$htpasswd_user_input"

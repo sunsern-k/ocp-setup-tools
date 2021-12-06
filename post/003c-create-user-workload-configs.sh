@@ -1,5 +1,5 @@
 
-# logmon_node_selector='node-role.kubernetes.io/<role>: ""'
+# monitoring_node_selector='node-role.kubernetes.io/<role>: ""'
 # This should be set from post_env
 # Toletation: infra=reserved:NoSchedule infra=reserved:NoExecute
 
@@ -13,7 +13,7 @@ data:
   config.yaml: |
     prometheusOperator:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -32,7 +32,7 @@ data:
             requests:
               storage: ${prometheus_storage_size}
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -42,7 +42,7 @@ data:
         effect: "NoExecute"
     thanosRuler:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"

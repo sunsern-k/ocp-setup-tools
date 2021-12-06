@@ -1,9 +1,9 @@
 
-# logmon_node_selector='node-role.kubernetes.io/<role>: ""'
+# monitoring_node_selector='node-role.kubernetes.io/<role>: ""'
 # This should be set from post_env
 # Toletation: infra=reserved:NoSchedule infra=reserved:NoExecute
 
-cat <<END > "${cluster_monitoring_config}"
+cat <<END > "${monitoring_config}"
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -14,7 +14,7 @@ data:
     enableUserWorkload: true
     prometheusOperator:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -33,7 +33,7 @@ data:
             requests:
               storage: ${prometheusk8s_storage_size}
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -51,7 +51,7 @@ data:
             requests:
               storage: ${alertmanager_storage_size}
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -61,7 +61,7 @@ data:
         effect: "NoExecute"
     kubeStateMetrics:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -71,7 +71,7 @@ data:
         effect: "NoExecute"
     grafana:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -81,7 +81,7 @@ data:
         effect: "NoExecute"
     telemeterClient:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -91,7 +91,7 @@ data:
         effect: "NoExecute"
     k8sPrometheusAdapter:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -101,7 +101,7 @@ data:
         effect: "NoExecute"
     openshiftStateMetrics:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -111,7 +111,7 @@ data:
         effect: "NoExecute"
     thanosQuerier:
       nodeSelector:
-        ${logmon_node_selector}
+        ${monitoring_node_selector}
       tolerations:
       - key: "infra"
         value: "reserved"

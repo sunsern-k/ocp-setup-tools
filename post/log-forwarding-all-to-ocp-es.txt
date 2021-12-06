@@ -1,2 +1,0 @@
-Use the log-forwarding-all-to-ocp-es.yaml.example
-Then oc apply -f <log-forwarding-file>.yaml

@@ -1,0 +1,11 @@
+To define index patterns and create visualizations in Kibana:
+
+1) In the OpenShift Container Platform console, click the Application Launcher app launcher and select Logging.
+
+2) Create your Kibana index patterns by clicking Management → Index Patterns → Create index pattern:
+
+3) Each user must manually create index patterns when logging into Kibana the first time to see logs for their projects. Users must create an index pattern named app and use the @timestamp time field to view their container logs.
+
+4) Each admin user must create index patterns when logged into Kibana the first time for the app, infra, and audit indices using the @timestamp time field.
+
+5) Create Kibana Visualizations from the new index patterns.

@@ -3,7 +3,7 @@
 # OpenShift Elasticsearch Operator
   - Operators -> OperatorHub
   - Find "OpenShift Elasticsearch Operator" -> install
-  - Select Installation mode: "All anmespaces on the cluster" 
+  - Select Installation mode: "All namespaces on the cluster" 
   - Select "openshift-operators-redhat" - under Installed Namespace
   - Select "Enable operator recommended cluster monitoring on this namespace"
   - Select "stable-5.x"
