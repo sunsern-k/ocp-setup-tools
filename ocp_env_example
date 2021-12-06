@@ -49,8 +49,8 @@ ntpserver="__NTP_SERVER__"
 
 
 export dnsserver basedomain clustername workercount 
-export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore helper bastion_host
-export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix
+export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastion_host
+export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver:q
 export httpproxy httpsproxy noproxy 
 export pullsecret
 
@@ -62,10 +62,10 @@ export GOVC_INSECURE=true
 export GOVC_DATACENTER="${vcenterdatacenter}"
 export GOVC_FOLDER="${vcenterfolder}"
 
-export OCP_DIR=~/$clustername
+export OCP_DIR=$HOME/$clustername
 [ ! -d $OCP_DIR ] && mkdir -p $OCP_DIR
 
-export OCP_BACKUP=~/backup/${OCP_DIR}
+export OCP_BACKUP=$HOME/backup/$clustername
 [ ! -d ${OCP_BACKUP} ] && mkdir -p $OCP_BACKUP
 
 export OCP_DOMAIN="${clustername}.${basedomain}"
