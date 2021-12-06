@@ -9,6 +9,7 @@ vcenterpassword="__VCENTERPASSWORD__"
 vcenterdatacenter="__VCENTERDATACENTER__"
 vcenterhost="__VCENTERHOST__"
 vcenterdatastore="__VCENTERDATASTORE__"
+#vcenterfolder must be in the foramt of /$vcenterdatacenter/vm/<FOLDER>
 vcenterfolder="__VCENTERFOLDER__"
 #
 helper="__helper_IP_ADDRESS__"
@@ -34,13 +35,14 @@ mtu="1450"
 pullsecret_file="__PULLSECERT_FILE__"
 pullsecret=$(cat $pullsecret_file)
 
-ssh_key_name="__sshkey_name__"
-ssh_public_key_file="$HOME/.ssh/${ssh_key_name}.pub"
+export ssh_key_name="__sshkey_name__"
+export ssh_public_key_file="$HOME/.ssh/${ssh_key_name}.pub"
 if [ ! -f $ssh_public_key_file ]
 then
   [ -f install/001-setup-sshkey.sh ] && install/001-setup-sshkey.sh
+  export ssh_public_key=$(cat $ssh_public_key_file)
 else
-  ssh_public_key=$(cat $ssh_public_key_file)
+  export ssh_public_key=$(cat $ssh_public_key_file)
 fi
 
 ntpserver="__NTP_SERVER__"
@@ -50,7 +52,7 @@ export dnsserver basedomain clustername workercount
 export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore helper bastion_host
 export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix
 export httpproxy httpsproxy noproxy 
-export pullsecret ssh_public_key
+export pullsecret
 
 
 export GOVC_URL="https://$vcenter"

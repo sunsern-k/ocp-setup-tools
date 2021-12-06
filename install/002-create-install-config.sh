@@ -10,7 +10,7 @@ compute:
   name: worker
   replicas: 0 
 controlPlane:
-  hyperthreading: Enabled   
+  hyperthreading: Enabled
   name: master
   replicas: 3 
 metadata:
@@ -18,7 +18,6 @@ metadata:
 networking:
   clusterNetwork:
     - cidr: $podcidr
-      hostPrefix: $hostprefix
   machineNetwork:
     - cidr: $machinecidr
   networkType: OpenShiftSDN
@@ -31,7 +30,7 @@ platform:
     password: $vcenterpassword
     datacenter: $vcenterdatacenter 
     defaultDatastore: $vcenterdatastore 
-    folder: "/$vcenterdatacenter/vm/$clustername" 
+    folder: "$vcenterfolder" 
 fips: false 
 pullSecret: $(echo "'$(echo $pullsecret)'")
 sshKey: $(echo "'$(echo $ssh_public_key)'") 
