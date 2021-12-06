@@ -18,7 +18,7 @@ metadata:
 networking:
   clusterNetwork:
     - cidr: $podcidr
-      hostPrefix: 23
+      hostPrefix: $hostprefix
   machineNetwork:
     - cidr: $machinecidr
   networkType: OpenShiftSDN
