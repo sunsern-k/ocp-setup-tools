@@ -4,10 +4,10 @@ do
   # VM name on vCenter 
   vmname_prefix=""
   vmname_subfix=""
-  vmname="${vmname_prefix:infra}${i}${vmname_subfix}"
+  vmname="${vmname_prefix:log}${i}${vmname_subfix}"
   
   # DNS record
-  vmfqdn="infra0"${i}.${OCP_DOMAIN}
+  vmfqdn="log0"${i}.${OCP_DOMAIN}
   
   # Searching for an IP address from DNS
   nip=$(dig +noall +answer @${dnsserver} +short $vmfqdn)

@@ -1,17 +1,24 @@
-for node in master0
+
+for i in {1..3}
 do
-  for i in {0..2}
-  do
-    h="${node}${i}.${OCP_DOMAIN}"
-    nip=$(dig +noall +answer @${dnsserver} +short $h)
-    gw="$gateway"
-    nm="$netmask"
-    export IPCFG="ip=${nip}::${gw}:${nm}:${h}:ens192:none nameserver=${dnsserver}"
+  # VM name on vCenter 
+  vmname_prefix=""
+  vmname_subfix=""
+  vmname="${vmname_prefix:master}${i}${vmname_subfix}"
+  
+  # DNS record
+  vmfqdn="master0"${i}.${OCP_DOMAIN}
+  
+  # Searching for an IP address from DNS
+  nip=$(dig +noall +answer @${dnsserver} +short $vmfqdn)
+  gw="$gateway"
+  nm="$netmask"
+  export IPCFG="ip=${nip}::${gw}:${nm}:${vmfqdn}:ens192:none nameserver=${dnsserver}"
 
-    # For DHCP
-    # export IPCFG="ip=ens192:dhcp nameserver=${dnsserver}"
+  # For DHCP
+  # export IPCFG="ip=ens192:dhcp nameserver=${dnsserver}"
 
-    echo $IPCFG
-    govc vm.change -vm "$h" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
-  done 
-done
+  echo "Setting IP: $vmname -> $IPCFG"
+  govc vm.change -vm "$vmname" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+done 
+

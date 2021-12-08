@@ -1,0 +1,1 @@
+govc vm.change -vm $RHCOS_INFRA_INT -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"

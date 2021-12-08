@@ -24,9 +24,14 @@ oc edit configs.imageregistry.operator.openshift.io
 storage: {}
 storageManaged: false
 
-# To
+# To (if the registry pvc name is image-registry-storage then it is not specified the claim name)
 storage:
   pvc:
     claim:
+
+# To if the pvc name is not image-registry-storage then specify the pvc name
+storage:
+  pvc:
+    claim: <registry-pvc-name>
 
 
