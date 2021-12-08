@@ -7,7 +7,5 @@ m=$2
 cpu=${c:=2}
 mem=${b:=8096}
 
-govc vm.change -vm $RHCOS_ODF -c 16 -m 32768
-
 govc vm.change -vm $RHCOS_BOOTSTRAP -c $cpu -m $mem
 
