@@ -7,4 +7,4 @@ m=$2
 cpu=${c:=4}
 mem=${b:=16384}
 
-govc vm.change -vm $RHCOS_MASTER -c $cpu -m $memory
+govc vm.change -vm $RHCOS_MASTER -c $cpu -m $mem
