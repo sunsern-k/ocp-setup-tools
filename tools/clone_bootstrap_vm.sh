@@ -1,6 +1,6 @@
 vmname_prefix=""
-vmname_subfix=""
+vmname_suffix=""
 
-vmname=${vmname_prefix}${i}${vmname_subfix}
+vmname=${vmname_prefix}${vmname_suffix}
 
 govc vm.clone -vm $RHCOS_BOOTSTRAP -on=false $vmname
