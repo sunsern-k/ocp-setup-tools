@@ -20,7 +20,6 @@ storage:
         logdir /var/log/chrony
 END
 
-
 echo "Generating 99-master-chrony.bu"
 cat <<END > 99-master-chrony.bu
 variant: openshift
@@ -47,6 +46,6 @@ echo "Generating chrony configurations..."
 butane 99-worker-chrony.bu -o ${OCP_DIR}/openshift/99_openshift-machineconfig_99-worker-chrony.yaml
 butane 99-master-chrony.bu -o ${OCP_DIR}/openshift/99_openshift-machineconfig_99-master-chrony.yaml
 chmod 640 ${OCP_DIR}/openshift/99_openshift-machineconfig_99-*.yaml
-ls -l ${OCP_DIR}/openshift/99_openshift-machineconfig_99*chrony*
 cat ${OCP_DIR}/openshift/99_openshift-machineconfig_99-worker-chrony.yaml
 cat ${OCP_DIR}/openshift/99_openshift-machineconfig_99-master-chrony.yaml
+ls -l ${OCP_DIR}/openshift/99_openshift-machineconfig_99*chrony*

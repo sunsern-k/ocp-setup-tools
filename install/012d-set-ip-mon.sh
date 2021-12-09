@@ -1,13 +1,20 @@
 
 for i in {1..2}
 do
-  # VM name on vCenter 
-  vmname_prefix=""
-  vmname_subfix=""
-  vmname="${vmname_prefix:log}${i}${vmname_subfix}"
-  
+
   # DNS record
-  vmfqdn="log0"${i}.${OCP_DOMAIN}
+  vmfqdn="log0${i}.${OCP_DOMAIN}"
+
+  # VM name on vCenter 
+  # Ex: VMname is a DNS record
+  # vmname_prefix="log0"
+  # vmname_suffix=".${OCP_DOMAIN}"
+  # vmname="${vmname_prefix}${i}${vmname_suffix}"
+  
+  # EX: Customized VM name:  OCP_Int_Logx_<IP_oct3>.<IP_oct4>
+  vmname_prefix="OCP_Int_Log"
+  vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
+  vmname="${vmname_prefix}${i}_${vmname_suffix}"
   
   # Searching for an IP address from DNS
   nip=$(dig +noall +answer @${dnsserver} +short $vmfqdn)
