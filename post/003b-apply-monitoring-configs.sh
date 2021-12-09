@@ -1,7 +1,7 @@
-if [ -f ${cluster_monitoring_config} ]
+if [ -f "${monitoring_config}" ]
 then
-  echo "Applying ${cluster_monitoring_config}..."
-  oc apply -f  ${cluster_monitoring_config}
+  echo "Applying ${monitoring_config}..."
+  oc apply -f  ${monitoring_config}
 else
   echo "[Skipped]: Unable to find the cluster monitoring config"
 fi
