@@ -32,6 +32,7 @@ prometheusk8s_retention="7d"
 prometheus_stroageclass="ocs-storagecluster-ceph-rbd"
 prometheus_storage_size="100Gi"
 prometheus_retention="7d"
+user_workload_config="user-workload-config.yaml"
 
 
 ## Log Forwarding to an external ElasticSearch 
@@ -50,7 +51,7 @@ export logging_node_selector logging_storageclass logging_storage_size logging_c
 export registry_node_selector registry_pvc_config registry_storage_mode registry_storage_size registry_storageclass
 export monitoring_node_selector monitoring_config 
 export alertmanager_storageclass alertmananager_storage_size
-export prometheusk8s_stroageclass prometheusk8s_storage_size prometheusk8s_retention
+export prometheusk8s_stroageclass prometheusk8s_storage_size prometheusk8s_retention user_workload_config
 export prometheus_stroageclass prometheus_storage_size prometheus_retention
 export es_username es_password es_url
 
