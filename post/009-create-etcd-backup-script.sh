@@ -98,7 +98,7 @@ spec:
               command:
                 - "/bin/bash"
                 - "-c"
-                - oc get no -l node-role.kubernetes.io/master --no-headers -o name | head -n 1 | while read node; do oc debug $node -- bash -c "chroot /host  sudo -E  mount -t nfs $etcd_backup_nfs_path  /home/core/backup && chroot /host sudo -E /usr/local/bin/cluster-backup.sh /home/core/backup && chroot /host sudo -E find /home/core/backup/ -type f -mmin +1 -delete"; done
+                - oc get no -l node-role.kubernetes.io/master --no-headers -o name | head -n 1 | while read node; do oc debug $node -- bash -c "chroot /host &&  sudo -E  mount -t nfs $etcd_backup_nfs_path  /home/core/backup && chroot /host sudo -E /usr/local/bin/cluster-backup.sh /home/core/backup && chroot /host sudo -E find /home/core/backup/ -type f -mmin +1 -delete"; done
           restartPolicy: "Never"
           terminationGracePeriodSeconds: 30
           activeDeadlineSeconds: 500
