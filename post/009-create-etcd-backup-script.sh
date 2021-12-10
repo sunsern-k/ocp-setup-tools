@@ -14,7 +14,7 @@ fi
 # Create a service account
 echo "Creating the SA of etcd backup: ${etcd_backup_sa_config}..."
 
-cat <<END > $etc_backup_sa_config
+cat <<END >$etcd_backup_sa_config
 kind: ServiceAccount
 apiVersion: v1
 metadata:
@@ -24,7 +24,7 @@ metadata:
     app: openshift-backup
 END
 echo "oc create -f $etcd_backup_sa_config"
-oc create -f $etcd_backup_sa_config
+oc apply -f $etcd_backup_sa_config
 
 # Create ClusterRole 
 cat <<END > $etcd_backup_clusterrole
@@ -44,7 +44,7 @@ rules:
   verbs: ["get", "list", "create", "delete", "watch"]
 END
 echo "oc create -f $etcd_backup_clusterrole"
-oc create -f $etcd_backup_clusterrole
+oc apply -f $etcd_backup_clusterrole
 
 # Create clusterrolebinding
 
@@ -65,7 +65,7 @@ roleRef:
   name: cluster-etcd-backup
 END
 echo "oc create -f $etcd_backup_clusterrolebinding"
-oc create -f $etcd_backup_clusterrolebinding
+oc apply -f $etcd_backup_clusterrolebinding
 
 # Create etcd backup cron job
 cat <<END > $etcd_backup_cronjob
@@ -77,7 +77,7 @@ metadata:
   labels:
     app: openshift-backup
 spec:
-  schedule: "* * * * *"
+  schedule: "0 * * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
