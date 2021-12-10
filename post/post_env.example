@@ -43,9 +43,14 @@ es_url="https://<ES_URL>"
 ## Ingress
 ingress_node_selector='node-role.kubernetes.io/infra-int: ""'
 
+## etcd backup
+etcd_backup_project="ocp-etcd-backup"
+etcd_backup_sa_config="ocp-etc-backup-sa.yaml"
+etcd_backup_clusterrole="ocp-etc-backup-clusterrole.yaml"
+etcd_backup_clusterrolebinding="ocp-etc-backup-clusterrolebinding.yaml"
+etcd_backup_cronjob="ocp-etc-backup-cronjob.yaml"
+etcd_backup_nfs_path="<NFS_SERVER>:/<BACKUP_PATH>"
 
-# Reference
-# Infra node OpenShift 4: https://access.redhat.com/solutions/5034771 - how to move workload to infra nodes 
 
 export logging_node_selector logging_storageclass logging_storage_size logging_config
 export registry_node_selector registry_pvc_config registry_storage_mode registry_storage_size registry_storageclass
@@ -54,5 +59,7 @@ export alertmanager_storageclass alertmananager_storage_size
 export prometheusk8s_stroageclass prometheusk8s_storage_size prometheusk8s_retention user_workload_config
 export prometheus_stroageclass prometheus_storage_size prometheus_retention
 export es_username es_password es_url
+export etcd_backup_project etcd_backup_clusterrole etcd_backup_sa_config etcd_backup_clusterrolebinding etcd_backup_cronjob
 
-
+# Reference
+# Infra node OpenShift 4: https://access.redhat.com/solutions/5034771 - how to move workload to infra nodes 
