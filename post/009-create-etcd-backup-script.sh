@@ -106,3 +106,6 @@ spec:
           serviceAccountName: "openshift-backup"
           serviceAccount: "openshift-backup"
 END
+
+echo "oc create -f $etcd_backup_cronjob"
+oc apply -f $etcd_backup_cronjob
