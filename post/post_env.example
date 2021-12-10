@@ -59,7 +59,7 @@ export alertmanager_storageclass alertmananager_storage_size
 export prometheusk8s_stroageclass prometheusk8s_storage_size prometheusk8s_retention user_workload_config
 export prometheus_stroageclass prometheus_storage_size prometheus_retention
 export es_username es_password es_url
-export etcd_backup_project etcd_backup_clusterrole etcd_backup_sa_config etcd_backup_clusterrolebinding etcd_backup_cronjob
+export etcd_backup_project etcd_backup_clusterrole etcd_backup_sa_config etcd_backup_clusterrolebinding etcd_backup_cronjob etcd_backup_nfs_path
 
 # Reference
 # Infra node OpenShift 4: https://access.redhat.com/solutions/5034771 - how to move workload to infra nodes 
