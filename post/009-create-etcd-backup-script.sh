@@ -69,7 +69,7 @@ oc apply -f $etcd_backup_clusterrolebinding
 
 # Create etcd backup cron job
 cat <<END > $etcd_backup_cronjob
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: openshift-backup
