@@ -1,17 +1,24 @@
 echo "Copying the bootstrap.ign to the $helper server.."
-sudo cp ${OCP_DIR}/bootstrap.ign /var/www/html
-sudo chmod 644 /var/www/html/bootstrap.ign 
-sudo ls -l /var/www/html/bootstrap.ign
+
+http_dir=/var/www/html/$clustername
+append_dir=$HOME/$clustername
+
+[ ! -d $http_dir ] && mkdir $http_dir && chmod 644 $http_dir
+[ ! -d $append_dir ] && mkdir $append_dir
+
+sudo cp ${OCP_DIR}/bootstrap.ign $http_dir
+sudo chmod 644 $http_dir/*
+sudo ls -l $http_dir/bootstrap.ign
 
 echo "Create the append-boottrap.ign.."
 
-cat <<END > $HOME/append-bootstrap.ign
+cat <<END > $append_dir/append-bootstrap.ign
 {
   "ignition": {
       "config": {
           "merge": [
               {
-                  "source": "http://${HTTP_HOST}/bootstrap.ign",
+                  "source": "http://${HTTP_HOST}/$clustername/bootstrap.ign",
                   "verification": {}
               }
           ]
@@ -26,8 +33,8 @@ cat <<END > $HOME/append-bootstrap.ign
 }
 END
 
-cat $HOME/append-bootstrap.ign
+cat $append_dir/append-bootstrap.ign
 
 echo "Creating the based64-encoded append-bootstrap.."
-cat $HOME/append-bootstrap.ign | base64 -w0 > $HOME/append-bootstrap.64
-ls -l $HOME/append-bootstrap*
+cat $append_dir/append-bootstrap.ign | base64 -w0 > $append_dir/append-bootstrap.64
+ls -l $append_dir/append-bootstrap*
