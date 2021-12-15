@@ -45,11 +45,12 @@ ingress_node_selector='node-role.kubernetes.io/infra-int: ""'
 
 ## etcd backup
 etcd_backup_project="ocp-etcd-backup"
-etcd_backup_sa_config="ocp-etc-backup-sa.yaml"
-etcd_backup_clusterrole="ocp-etc-backup-clusterrole.yaml"
-etcd_backup_clusterrolebinding="ocp-etc-backup-clusterrolebinding.yaml"
-etcd_backup_cronjob="ocp-etc-backup-cronjob.yaml"
-etcd_backup_nfs_path="<NFS_SERVER>:/<BACKUP_PATH>"
+etcd_backup_sa_config="ocp-etcd-backup-sa.yaml"
+etcd_backup_clusterrole="ocp-etcd-backup-clusterrole.yaml"
+etcd_backup_clusterrolebinding="ocp-etcd-backup-clusterrolebinding.yaml"
+etcd_backup_cronjob="ocp-etcd-backup-cronjob.yaml"
+# NFS Server must be updated in the etcd backup template. 
+#etcd_backup_nfs_path="<NFS_SERVER>:/<BACKUP_PATH>"
 
 
 export logging_node_selector logging_storageclass logging_storage_size logging_config
