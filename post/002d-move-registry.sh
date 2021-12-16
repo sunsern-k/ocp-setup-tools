@@ -8,6 +8,6 @@
 # Reference:  https://access.redhat.com/solutions/5034771
 
 
-echo "Setting the node selector and tolerations on the image registry .."
-echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\": \"\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'"
-oc patch configs.imageregistry.operator.openshift.io/cluster --type=merge -p $(echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\": \"\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'")
+echo "Generating the command to patch the node selector and tolerations on the image registry .."
+echo "**PLEASE RUN THE FOLLOWING COMMAND***"
+echo oc patch configs.imageregistry.operator.openshift.io/cluster --type=merge -p "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\": \"\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'"
