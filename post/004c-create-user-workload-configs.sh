@@ -13,7 +13,7 @@ data:
   config.yaml: |
     prometheusOperator:
       nodeSelector:
-        ${monitoring_node_selector}:""
+        ${monitoring_node_selector}: ''
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -32,7 +32,7 @@ data:
             requests:
               storage: ${prometheus_storage_size}
       nodeSelector:
-        ${monitoring_node_selector}:""
+        ${monitoring_node_selector}: ''
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -42,7 +42,7 @@ data:
         effect: "NoExecute"
     thanosRuler:
       nodeSelector:
-        ${monitoring_node_selector}:""
+        ${monitoring_node_selector}: ''
       tolerations:
       - key: "infra"
         value: "reserved"
