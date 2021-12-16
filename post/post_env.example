@@ -10,7 +10,7 @@ logging_storage_size="300Gi"
 registry_node_selector='node-role.kubernetes.io/infra-int'
 registry_pvc_config="registry-pvc-config.yaml"
 # ReadWriteMany - using the cephfs
-registry_storageclass="openshift-storage.cephfs.csi.ceph.com"
+registry_storageclass="ocs-storagecluster-cephfs"
 registry_storage_mode="ReadWriteMany"
 registry_storage_size="100Gi"
 

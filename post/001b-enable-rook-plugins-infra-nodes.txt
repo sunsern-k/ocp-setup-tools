@@ -1,0 +1,22 @@
+
+
+# Update
+
+oc edit configmap rook-ceph-operator-config -n openshift-storage
+
+# Then add taints of infra nodes below: 
+data:
+  CSI_LOG_LEVEL: '5'
+  CSI_PLUGIN_TOLERATIONS: |
+    - key: infra
+      operator: Equal
+      value: reserved
+      effect: NoSchedule  
+    - key: infra 
+      operator: Equal
+      value: reserved
+      effect: NoExecute  
+    - key: node.ocs.openshift.io/storage
+      operator: Equal
+      value: "true"
+      effect: NoSchedule
