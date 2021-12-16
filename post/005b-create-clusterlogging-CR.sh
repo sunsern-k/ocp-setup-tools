@@ -18,7 +18,7 @@ spec:
     elasticsearch:
       nodeCount: 3 
       nodeSelector:
-        ${logging_node_selector} 
+        ${logging_node_selector}:"" 
       tolerations:
       - key: infra 
         value: reserved
@@ -53,7 +53,7 @@ spec:
           memory: 1Gi
       replicas: 1
       nodeSelector:
-        ${logging_node_selector}
+        ${logging_node_selector}:""
       tolerations:
       - key: infra 
         value: reserved

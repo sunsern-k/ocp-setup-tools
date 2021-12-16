@@ -1,13 +1,13 @@
 # Logging parameters
-# logging_node_selector is in the format '<selector_key>: "<value>"'
-logging_node_selector='node-role.kubernetes.io/logmon: ""'
+# logging_node_selector is in the format '<selector_key>' only
+logging_node_selector='node-role.kubernetes.io/logmon'
 logging_config="logging-config.yaml"
 logging_storageclass="ocs-storagecluster-ceph-rbd"
 logging_storage_size="300Gi"
 
 # Image registry parameters
-# registry_node_selector is in the format '<selector_key>: "<value>"'
-registry_node_selector='node-role.kubernetes.io/infra-int: ""'
+# registry_node_selector is in the format '<selector_key>' only
+registry_node_selector='node-role.kubernetes.io/infra-int'
 registry_pvc_config="registry-pvc-config.yaml"
 # ReadWriteMany - using the cephfs
 registry_storageclass="openshift-storage.cephfs.csi.ceph.com"
@@ -15,8 +15,8 @@ registry_storage_mode="ReadWriteMany"
 registry_storage_size="100Gi"
 
 # Monitoring parameters
-# monitoring_node_selector is in the format '<selector_key>: "<value>"'
-monitoring_node_selector='node-role.kubernetes.io/logmon: ""'
+# monitoring_node_selector is in the format '<selector_key>' only
+monitoring_node_selector='node-role.kubernetes.io/logmon'
 monitoring_config="cluster-monitoring-config.yaml"
 
 ## Alertmanager parameters
@@ -41,7 +41,7 @@ es_password="<password>"
 es_url="https://<ES_URL>"
 
 ## Ingress
-ingress_node_selector='node-role.kubernetes.io/infra-int: ""'
+ingress_node_selector='node-role.kubernetes.io/infra-int'
 
 ## etcd backup
 etcd_backup_project="ocp-etcd-backup"

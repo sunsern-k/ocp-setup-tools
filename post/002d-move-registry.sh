@@ -9,5 +9,5 @@
 
 
 echo "Setting the node selector and tolerations on the image registry .."
-echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'"
-oc patch configs.imageregistry.operator.openshift.io/cluster --type=merge -p $(echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'")
+echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\": \"\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'"
+oc patch configs.imageregistry.operator.openshift.io/cluster --type=merge -p $(echo "'{\"spec\":{\"nodeSelector\": {\"${registry_node_selector}\": \"\"},\"tolerations\": [{\"effect\":\"NoSchedule\",\"key\": \"infra\",\"value\": \"reserved\"},{\"effect\":\"NoExecute\",\"key\": \"infra\",\"value\": \"reserved\"}]}}'")

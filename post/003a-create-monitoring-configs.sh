@@ -14,7 +14,7 @@ data:
     enableUserWorkload: true
     prometheusOperator:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:''
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -33,7 +33,7 @@ data:
             requests:
               storage: ${prometheusk8s_storage_size}
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -51,7 +51,7 @@ data:
             requests:
               storage: ${alertmanager_storage_size}
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -61,7 +61,7 @@ data:
         effect: "NoExecute"
     kubeStateMetrics:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -71,7 +71,7 @@ data:
         effect: "NoExecute"
     grafana:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -81,7 +81,7 @@ data:
         effect: "NoExecute"
     telemeterClient:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -91,7 +91,7 @@ data:
         effect: "NoExecute"
     k8sPrometheusAdapter:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -101,7 +101,7 @@ data:
         effect: "NoExecute"
     openshiftStateMetrics:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
@@ -111,7 +111,7 @@ data:
         effect: "NoExecute"
     thanosQuerier:
       nodeSelector:
-        ${monitoring_node_selector}
+        ${monitoring_node_selector}:""
       tolerations:
       - key: "infra"
         value: "reserved"
