@@ -1,6 +1,6 @@
 
 echo "Creating a secret - credentials of external ElasticSearch: ${es_url}..."
-cat <<END >external-es-credentials.yaml
+cat <<END > ${OCP_POST}/external-es-credentials.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -11,9 +11,9 @@ data:
 END
 
 echo "Applying a secret - ext-es-credentials.."
-oc apply -f external-es-credentials.yaml -n openshift-logging
+oc apply -f ${OCP_POST}/external-es-credentials.yaml -n openshift-logging
 
-cat <<END >external-es-config.yaml
+cat <<END > ${OCP_POST}/external-es-config.yaml
 kind: ClusterLogForwarder
 metadata:
   name: instance
@@ -39,3 +39,8 @@ spec:
      outputRefs:
      - ext-es
 END
+
+ls -l ${OCP_POST}/external-es-config.yaml
+
+echo "Apply ClusterLogForwarding to external ES ${es_url}..."
+oc apply -f ${OCP_POST}/external-es-config.yaml

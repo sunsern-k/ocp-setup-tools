@@ -1,4 +1,4 @@
-for i in {1..3}
+for i in $(seq -s' ' $logmon_count)
 do
   # DNS record
   vmfqdn="log0"${i}.${OCP_DOMAIN}
@@ -10,7 +10,7 @@ do
   # vmname="${vmname_prefix}${i}${vmname_suffix}"
   
   # EX: Customized VM name:  OCP_Int_Logx_<IP_oct3>.<IP_oct4>
-  vmname_prefix="OCP_Int_Log"
+  vmname_prefix="OCP_Int_Log0"
   vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
   vmname="${vmname_prefix}${i}_${vmname_suffix}"
 

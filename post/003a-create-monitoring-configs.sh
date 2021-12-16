@@ -3,7 +3,7 @@
 # This should be set from post_env
 # Toletation: infra=reserved:NoSchedule infra=reserved:NoExecute
 
-cat <<END > "${monitoring_config}"
+cat <<END > "${OCP_POST}/${monitoring_config}"
 apiVersion: v1
 kind: ConfigMap
 metadata:

@@ -52,6 +52,11 @@ etcd_backup_cronjob="ocp-etcd-backup-cronjob.yaml"
 # NFS Server must be updated in the etcd backup template. 
 #etcd_backup_nfs_path="<NFS_SERVER>:/<BACKUP_PATH>"
 
+# LDAP
+export ldap_project="ldap-sync"
+export ldap_server="https://<ldap_server>:<port>"
+export binddn="cn=xxx,ou=xxxx,dc=xx,dc=xx,dc=xxx"
+export ldap_query_string='dc=xx,dc=xx,dc=xx?uid'
 
 export logging_node_selector logging_storageclass logging_storage_size logging_config
 export registry_node_selector registry_pvc_config registry_storage_mode registry_storage_size registry_storageclass

@@ -3,7 +3,7 @@ then
   echo "Please verify that all required registry parameters are set."
   exit 1
 else 
-cat <<END > $registry_pvc_config
+cat <<END > ${OCP_POST}/$registry_pvc_config
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:

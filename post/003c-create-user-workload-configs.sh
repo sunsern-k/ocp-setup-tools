@@ -3,7 +3,7 @@
 # This should be set from post_env
 # Toletation: infra=reserved:NoSchedule infra=reserved:NoExecute
 
-cat <<END > "${user_workload_config}"
+cat <<END > "${OCP_POST}/${user_workload_config}"
 apiVersion: v1
 kind: ConfigMap
 metadata:

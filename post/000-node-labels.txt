@@ -1,53 +1,36 @@
-# Infra - ACM/Quay - infra-mgt
-# Assuming the infra01 - infra03 are reserved for ACM/Quay
-for node in infra0
-do
-  for i in {1..3}
-  do
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra-mgt=
-  done
-done
+# It is based on following assumptions:
+# Reference: https://access.redhat.com/solutions/5034771
+# Infra nodes whether they are infra(router/registry) / odf / infra (ACM/Quay) are considered to have node-role.kubernetes.io/infra=
+# This is to prevent incurring billing costs against subscription counts 
 
-# Infra - router/registry - infra-int
-# Adjust the node number as appropriate
-# Assuming the infra04 - infra05 are reserved for router/registry
-for node in infra0
-do
-  for i in {4..5}
-  do
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra-int=
-  done
-done
+# However, the node-role.kubernetes.io/infra alone is not unique. In order to have a unique label for each type of node then 
+# add a unique label for each node so that it can be used for the node selector in order to move specific workloads such as logging stacks/monitoring stack/etc. 
+# to run on this specific node label. 
 
-# Infra - Loging/Monitoring - logmon
-for node in log0
-do
-  for i in {1..3}
-  do
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/logmon=
-  done
-done
+# Then, design to use following labels: 
 
-# ODF - storage
-for node in odf0
-do
-  for i in {1..3}
-  do
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/infra=
-    oc label node ${node}${i}.${OCP_DOMAIN} node-role.kubernetes.io/storage=
-    oc label node ${node}${i}.${OCP_DOMAIN} cluster.ocs.openshift.io/openshift-storage=
-  done
-done
+# node-role.kubernetes.io/infra-int=          --> infra-internal which is for routers and registry
+# node-role.kubernetes.io/infra-logmon=       --> Logging and monitoring stacks - assuming both stacks are running on the same sets of infra-logmon 
+# node-role.kubernetes.io/storage=            --> This is for ODF nodes.
+# node-role.kubernetes.io/infra-mgt=          --> This is for the management cluster where ACM / Quay are running on
 
-# Set taint configurations 
-oc adm taint nodes -l node-role.kubernetes.io/infra-mgt infra=reserved:NoSchedule infra=reserved:NoExecute
-oc adm taint nodes -l node-role.kubernetes.io/infra-int infra=reserved:NoSchedule infra=reserved:NoExecute
-oc adm taint nodes -l node-role.kubernetes.io/logmon infra=reserved:NoSchedule infra=reserved:NoExecute
+# It should be noted that the ODF node is required another label cluster.ocs.openshift.io/openshift-storage= per the ODF document. 
 
-# Set taint only for ODF nodes
-# ODF - https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage/4.8/html/managing_and_allocating_storage_resources/how-to-use-dedicated-worker-nodes-for-openshift-container-storage_rhocs
+# Then, labels above enable nodes to be uniquely selectable only. 
+# However, all are also worker nodes; therefore, other workloads even user applications are possible to schedule on these nodes. 
 
-oc adm taint nodes -l node-role.kubernetes.io/storage node.ocs.openshift.io/storage="true":NoSchedule 
+# In order to be possible to prevent or separate infra workloads to be running on these nodes only, taint configurations are required. 
+# In order to simplify configurations when move specific infra workloads to specific nodes, taints are the same across infra nodes.
+# Then use the same tolerations together with a specific node label (node-role.kubernetes.io/xxx) then it can archive isolation of infra workloads. 
+# With that, set taint configurations as below: 
+
+# oc adm taint nodes -l node-role.kubernetes.io/infra-mgt infra=reserved:NoSchedule infra=reserved:NoExecute
+# oc adm taint nodes -l node-role.kubernetes.io/infra-int infra=reserved:NoSchedule infra=reserved:NoExecute
+# oc adm taint nodes -l node-role.kubernetes.io/logmon infra=reserved:NoSchedule infra=reserved:NoExecute
+
+# Following this ODF document - https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage/4.8/html/managing_and_allocating_storage_resources/how-to-use-dedicated-worker-nodes-for-openshift-container-storage_rhocs
+# ODF nodes are required to taint with the specific configuration, set taint only for ODF nodes
+# oc adm taint nodes -l node-role.kubernetes.io/storage node.ocs.openshift.io/storage="true":NoSchedule 
+
+# With these node labels and taints, they will be configured in the post-install configurations for migrating logging/monitoring/registry/router to specific infra nodes. 
+

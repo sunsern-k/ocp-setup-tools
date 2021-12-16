@@ -19,4 +19,5 @@ vmname="${vmname_prefix}_${vmname_suffix}"
 # export IPCFG="ip=ens192:dhcp nameserver=${dnsserver}"
 
 echo "Setting IP: $vmname -> $IPCFG"
+echo govc vm.change -vm $vmname -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
 govc vm.change -vm $vmname -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"

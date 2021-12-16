@@ -14,7 +14,7 @@ fi
 # Create a service account
 echo "Creating the SA of etcd backup: ${etcd_backup_sa_config}..."
 
-cat <<END >$etcd_backup_sa_config
+cat <<END > ${OCP_POST}/$etcd_backup_sa_config
 kind: ServiceAccount
 apiVersion: v1
 metadata:
@@ -23,11 +23,11 @@ metadata:
   labels:
     app: openshift-backup
 END
-echo "oc create -f $etcd_backup_sa_config"
-oc apply -f $etcd_backup_sa_config
+echo "oc create -f ${OCP_POST}/$etcd_backup_sa_config"
+oc apply -f ${OCP_POST}/$etcd_backup_sa_config
 
 # Create ClusterRole 
-cat <<END > $etcd_backup_clusterrole
+cat <<END > ${OCP_POST}/$etcd_backup_clusterrole
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -43,12 +43,12 @@ rules:
      - "pods/log"
   verbs: ["get", "list", "create", "delete", "watch"]
 END
-echo "oc create -f $etcd_backup_clusterrole"
-oc apply -f $etcd_backup_clusterrole
+echo "oc create -f ${OCP_POST}/$etcd_backup_clusterrole"
+oc apply -f ${OCP_POST}/$etcd_backup_clusterrole
 
 # Create clusterrolebinding
 
-cat <<END > $etcd_backup_clusterrolebinding
+cat <<END > ${OCP_POST}/$etcd_backup_clusterrolebinding
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -64,8 +64,8 @@ roleRef:
   kind: ClusterRole
   name: cluster-etcd-backup
 END
-echo "oc create -f $etcd_backup_clusterrolebinding"
-oc apply -f $etcd_backup_clusterrolebinding
+echo "oc create -f ${OCP_POST}/$etcd_backup_clusterrolebinding"
+oc apply -f ${OCP_POST}/$etcd_backup_clusterrolebinding
 
 # Create etcd backup cron job
 if [ ! -f $etcd_backup_cronjob ]

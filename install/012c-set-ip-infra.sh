@@ -1,5 +1,5 @@
 
-for i in {1..2}
+for i in $(seq -s' ' $total_infra_count)
 do
   # DNS record
   vmfqdn="infra0${i}.${OCP_DOMAIN}"
@@ -11,7 +11,7 @@ do
   # vmname="${vmname_prefix}${i}${vmname_suffix}"
   
   # EX: Customized VM name:  OCP_Int_Infrax_<IP_oct3>.<IP_oct4>
-  vmname_prefix="OCP_Int_Infra"
+  vmname_prefix="OCP_Int_Infra0"
   vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
   vmname="${vmname_prefix}${i}_${vmname_suffix}"
   
@@ -25,5 +25,6 @@ do
   # export IPCFG="ip=ens192:dhcp nameserver=${dnsserver}"
 
   echo "Setting IP: $vmname -> $IPCFG"
+  echo govc vm.change -vm "$vmname" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
   govc vm.change -vm "$vmname" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
 done 

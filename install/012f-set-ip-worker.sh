@@ -1,6 +1,6 @@
 
 # Adjust a number of nodes as appropriate
-for i in {1..2}
+for i in $(seq -s' ' $worker_count)
 do
   # DNS record
   vmfqdn="worker0${i}.${OCP_DOMAIN}"
@@ -12,7 +12,7 @@ do
   # vmname="${vmname_prefix}${i}${vmname_suffix}"
   
   # EX: Customized VM name:  OCP_Int_Workerx_<IP_oct3>.<IP_oct4>
-  vmname_prefix="OCP_Int_Worker"
+  vmname_prefix="OCP_Int_Worker0"
   vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
   vmname="${vmname_prefix}${i}_${vmname_suffix}"
   
@@ -26,5 +26,6 @@ do
   # export IPCFG="ip=ens192:dhcp nameserver=${dnsserver}" 
 
   echo "Setting IP: $vmname -> $IPCFG"
+  echo govc vm.change -vm $vmname -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
   govc vm.change -vm $vmname -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
 done 

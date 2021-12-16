@@ -1,4 +1,6 @@
 
+# Accept the 1st input parameter as the path to the ca file
+# if not speficied, then read from $ca_file  
 caf=$1
 
 if [ ! "$caf" = "" ]

@@ -1,4 +1,4 @@
-cat <<END >logging-config.yaml
+cat <<END >${OCP_POST}/${logging_config}
 apiVersion: "logging.openshift.io/v1"
 kind: "ClusterLogging"
 metadata:

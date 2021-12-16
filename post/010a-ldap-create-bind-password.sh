@@ -1,3 +1,5 @@
+# Accept the 1st input parameter as the bind password
+# if not specificied, it will read from $bind_password
 bpw=$1
 if [ ! "$bpw" = "" ]
 then

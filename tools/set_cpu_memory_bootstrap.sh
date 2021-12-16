@@ -9,3 +9,5 @@ mem=${b:=8096}
 
 govc vm.change -vm $RHCOS_BOOTSTRAP -c $cpu -m $mem
 
+# disk cannot be configured from govc command...
+# So it might be better to update CPU/Memory/Disk all from UI. 

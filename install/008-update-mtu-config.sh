@@ -1,6 +1,6 @@
-if [ ! "$mtu" = "" ]
+if [ ! "$sdn_mtu" = "" ]
 then
-  echo "Updating the mtu: $mtu -  ${OCP_DIR}/manifests/cluster-network-03.config.yaml"
+  echo "Updating the SDN mtu: $sdn_mtu -  ${OCP_DIR}/manifests/cluster-network-03.config.yaml"
 
 cat <<END > ${OCP_DIR}/manifests/cluster-network-03.config.yaml
 apiVersion: operator.openshift.io/v1
@@ -10,7 +10,7 @@ metadata:
 spec:
   defaultNetwork:
     openshiftSDNConfig:
-      mtu: $mtu
+      mtu: $sdn_mtu
 END
 
   chmod 640 ${OCP_DIR}/manifests/cluster-network-03.config.yaml
@@ -18,5 +18,5 @@ END
   cat ${OCP_DIR}/manifests/cluster-network-03.config.yaml
 
 else
- echo "Skipped - the mtu is not specified - assumed 1450 which is the default value"
+ echo "Skipped - the SDN mtu is not specified - assumed 1450 which is the default value"
 fi

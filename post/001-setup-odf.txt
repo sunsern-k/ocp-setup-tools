@@ -1,5 +1,5 @@
-# Install OpenShift Container Storage Operator from UI: 
-# Reference: https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage/4.8
+# Install OpenShift Data Foundation Operator from UI: 
+# Reference: https://access.redhat.com/documentation/en-us/red_hat_openshift_data_foundation/4.9/html/deploying_openshift_data_foundation_on_vmware_vsphere/index
 # For VMware - use the dynamic "thin" storageclass as the PVs for each ODF node
 
 Procedure
@@ -8,10 +8,11 @@ Procedure
 - Search for "OpenShift Container Storage" from the list of operators and click on it.
 - Click Install.
 - Set the following options on the Install Operator page:
-  - Channel as stable-4.8.
+  - Channel as stable-4.9.
   - Installation Mode as A specific namespace on the cluster.
   - Installed Namespace as Operator recommended namespace openshift-storage. If Namespace openshift-storage does not exist, it will be created during the operator installation.
   - Approval Strategy as Automatic or Manual.
+  - Ensure that the Enable option is selected for the Console plugin
   - Click Install.
 
 NOTE:

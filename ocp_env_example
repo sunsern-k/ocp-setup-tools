@@ -9,8 +9,8 @@ vcenterpassword="__VCENTERPASSWORD__"
 vcenterdatacenter="__VCENTERDATACENTER__"
 vcenterhost="__VCENTERHOST__"
 vcenterdatastore="__VCENTERDATASTORE__"
-#vcenterfolder must be in the foramt of /$vcenterdatacenter/vm/<FOLDER>
-vcenterfolder="__VCENTERFOLDER__"
+#vcenterfolder must be in the format of /$vcenterdatacenter/vm/<FOLDER>
+vcenterfolder="/$vcenterdatacenter/vm/__VCENTERFOLDER__"
 #
 helper="__helper_IP_ADDRESS__"
 bastion_host="__bastion_hostname__"
@@ -29,10 +29,12 @@ machinecidr="10.0.0.0/16"
 servicecidr="172.30.0.0/16"
 hostprefix="23"
 # Default it must be less 50 bytes than the MTU such as 1500 -> 1450 (default), 9000 -> 8950
-mtu="1450"
+sdn_mtu="1450"
 
 gateway=""
 netmask=""
+
+ntpserver="__NTP_SERVER__"
 
 pullsecret_file="__PULLSECERT_FILE__"
 pullsecret=$(cat $pullsecret_file)
@@ -47,16 +49,24 @@ else
   export ssh_public_key=$(cat $ssh_public_key_file)
 fi
 
-ntpserver="__NTP_SERVER__"
-
+# A number of nodes
+master_count=3
+woker_count=2
+infra_int_count=2
+logmon_count=3
+infra_mgt_count=0
+odf_count=3
+# If the Infra int is starting from infra04.<domain> infra05.<domain> then set start_infra_int=4
+start_infra_int=""
+total_infra_count=$(($infra_int_count + $infra_mon_count + $infra_mgt_count ))
 
 export dnsserver basedomain clustername workercount 
 export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastion_host
-export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix mtu
+export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix sdn_mtu
 export httpproxy httpsproxy noproxy 
 export pullsecret_file pullsecret 
 export gateway netmask
-
+export master_count worker_count infra_int_count logmon_count infra_mgt_count odf_count
 
 export GOVC_URL="https://$vcenter"
 export GOVC_USERNAME="${vcenteruser}"
@@ -71,6 +81,10 @@ export OCP_DIR=$HOME/$clustername
 
 export OCP_BACKUP=$HOME/backup/$clustername
 [ ! -d ${OCP_BACKUP} ] && mkdir -p $OCP_BACKUP
+
+# Create the post directory to store the post-install configurations
+export OCP_POST=${OCP_DIR}/post
+[ -d ${OCP_POST} ] && mkdir -p ${OCP_POST}/post
 
 export OCP_DOMAIN="${clustername}.${basedomain}"
 export HTTP_HOST=$helper

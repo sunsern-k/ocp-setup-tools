@@ -20,13 +20,13 @@ spec:
         - givenName
         preferredUsername: 
         - sAMAccountName
-      bindDN: "cn=ocbsys,ou=xxxx,dc=sddc,dc=poc,dc=local" 
+      bindDN: "$binddn" 
       bindPassword: 
         name: ldap-secret
       ca: 
         name: ca-config-map
       insecure: true 
-      url: "ldaps://192.168.129.132:636/dc=sddc,dc=poc,dc=local?uid" 
+      url: "ldaps://$ldap_server/$ldap_query_string" 
 END
 
 echo "Applying LDAP configurations: ${OCP_DIR}/ldap-idp.yaml..."
