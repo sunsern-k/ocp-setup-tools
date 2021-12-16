@@ -84,7 +84,7 @@ export OCP_BACKUP=$HOME/backup/$clustername
 
 # Create the post directory to store the post-install configurations
 export OCP_POST=${OCP_DIR}/post
-[ ! -d ${OCP_POST} ] && mkdir -p ${OCP_POST}/post
+[ ! -d ${OCP_POST} ] && mkdir -p ${OCP_POST}
 
 export OCP_DOMAIN="${clustername}.${basedomain}"
 export HTTP_HOST=$helper
