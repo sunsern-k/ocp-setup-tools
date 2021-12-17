@@ -66,5 +66,10 @@ spec:
       type: "fluentd"  
       fluentd: 
         tolerations:
-        - operator: "Exists"
+        - key: infra 
+        value: reserved
+        effect: NoSchedule
+        - key: infra 
+          value: reserved
+          effect: NoExecute  
 END

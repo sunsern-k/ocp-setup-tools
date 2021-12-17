@@ -4,18 +4,11 @@
 
 oc edit configmap rook-ceph-operator-config -n openshift-storage
 
-# Then add taints of infra nodes below: 
+# Then add taints "operators: Exists" so that they will be running all nodes including master nodes. 
 data:
   CSI_LOG_LEVEL: '5'
   CSI_PLUGIN_TOLERATIONS: |
-    - key: infra
-      operator: Equal
-      value: reserved
-      effect: NoSchedule  
-    - key: infra 
-      operator: Equal
-      value: reserved
-      effect: NoExecute  
+      operator: Exists
     - key: node.ocs.openshift.io/storage
       operator: Equal
       value: "true"
