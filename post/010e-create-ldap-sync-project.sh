@@ -1,5 +1,4 @@
 is_created=$(oc projects -q |grep "^ldap-sync")
-ldap_project="ldap-sync"
 
 if [ "$is_created" = "" ]
 then
