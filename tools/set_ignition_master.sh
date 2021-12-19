@@ -18,10 +18,12 @@ then
     vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
     vmname="${vmname_prefix}${i}_${vmname_suffix}"
 
-    echo "Setting $vmname - guestinfo.ignition.config.data => the content of ${OCP_DIR}/worker.64"
-    govc vm.change -vm $vmname -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"
+    echo "Setting $vmname - guestinfo.ignition.config.data => the content of ${OCP_DIR}/master.64"
+    echo govc vm.change -vm $vmname -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/master.64)"
+    govc vm.change -vm $vmname -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/master.64)"
    done
 else
   echo "Setting $RHCOS_MASTER - guestinfo.ignition.config.data => the content of ${OCP_DIR}/master.64"
+  echo govc vm.change -vm $RHCOS_MASTER -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/master.64)"
   govc vm.change -vm $RHCOS_MASTER -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/master.64)"
 fi

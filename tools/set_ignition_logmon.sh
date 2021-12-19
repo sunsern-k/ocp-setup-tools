@@ -19,10 +19,12 @@ then
     vmname="${vmname_prefix}${i}_${vmname_suffix}"
 
     echo "Setting $vmname - guestinfo.ignition.config.data => the content of ${OCP_DIR}/worker.64"
+    echo govc vm.change -vm $vmname -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"
     govc vm.change -vm $vmname -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"
    done
 else
   echo "Setting $RHCOS_INFRA_MON - guestinfo.ignition.config.data => the content of ${OCP_DIR}/worker.64"
+  echo govc vm.change -vm $RHCOS_INFRA_MON -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"
   govc vm.change -vm $RHCOS_INFRA_MON -e "guestinfo.ignition.config.data=$(cat ${OCP_DIR}/worker.64)"
 fi
 
