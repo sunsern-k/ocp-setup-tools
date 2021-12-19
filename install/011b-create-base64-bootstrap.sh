@@ -2,7 +2,7 @@ echo "Copying the bootstrap.ign to the $helper server.."
 
 http_dir=/var/www/html/$clustername
 
-[ ! -d $http_dir ] && mkdir $http_dir
+[ ! -d $http_dir ] && sudo mkdir $http_dir
 
 sudo cp ${OCP_DIR}/bootstrap.ign $http_dir
 sudo chmod 766 -R $http_dir
