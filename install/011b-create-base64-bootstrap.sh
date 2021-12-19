@@ -36,3 +36,8 @@ cat $OCP_DIR/append-bootstrap.ign
 echo "Creating the based64-encoded append-bootstrap.."
 cat ${OCP_DIR}/append-bootstrap.ign | base64 -w0 > ${OCP_DIR}/append-bootstrap.64
 ls -l ${OCP_DIR}/append-bootstrap*
+sudo ls -ld $html_dir
+sudo ls -l $html_dir/*
+echo "Testing to access the bootstrap.ign"
+echo "curl -Is -o /dev/null http://${HTTP_HOST}/$clustername/bootstrap.ign"
+curl -Is -o /dev/null http://${HTTP_HOST}/$clustername/bootstrap.ign
