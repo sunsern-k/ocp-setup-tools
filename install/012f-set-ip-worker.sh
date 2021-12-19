@@ -3,11 +3,12 @@
 for i in $(seq -s' ' $worker_count)
 do
   # DNS record
+  #vmfqdn="worker${i}.${OCP_DOMAIN}"
   vmfqdn="worker0${i}.${OCP_DOMAIN}"
 
   # VM name on vCenter 
   # Ex: VMname is a DNS record
-  # vmname_prefix="odf0"
+  # vmname_prefix="worker0"
   # vmname_suffix=".${OCP_DOMAIN}"
   # vmname="${vmname_prefix}${i}${vmname_suffix}"
   
@@ -17,7 +18,7 @@ do
   vmname="${vmname_prefix}${i}_${vmname_suffix}"
   
   
-  nip=$(dig +noall +answer @${dnsserver} +short $h)
+  nip=$(dig +noall +answer @${dnsserver} +short $vmname)
   gw="$gateway"
   nm="$netmask"
   export IPCFG="ip=${nip}::${gw}:${nm}:${h}:ens192:none nameserver=${dnsserver}"
