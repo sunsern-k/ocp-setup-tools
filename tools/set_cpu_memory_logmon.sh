@@ -7,4 +7,4 @@ m=$2
 cpu=${c:=8}
 mem=${b:=32768}
 
-govc vm.change -vm $RHCOS_INFRA_MON -c $cpu -m $mem
+govc vm.change -vm $RHCOS_LOGMON -c $cpu -m $mem

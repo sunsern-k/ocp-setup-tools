@@ -14,5 +14,5 @@ do
   vmname_suffix="$(dig +noall +answer @${dnsserver} +short $vmfqdn | cut -d. -f3,4)"
   vmname="${vmname_prefix}${i}_${vmname_suffix}"
 
-  govc vm.clone -vm $RHCOS_INFRA_MON -on=false $vmname
+  govc vm.clone -vm $RHCOS_LOGMON -on=false $vmname
 done
