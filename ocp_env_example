@@ -51,7 +51,7 @@ fi
 
 # A number of nodes
 master_count=3
-woker_count=2
+worker_count=2
 infra_int_count=2
 logmon_count=3
 infra_mgt_count=0
