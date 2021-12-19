@@ -5,7 +5,7 @@ http_dir=/var/www/html/$clustername
 [ ! -d $http_dir ] && sudo mkdir $http_dir
 
 sudo cp ${OCP_DIR}/bootstrap.ign $http_dir/
-sudo chmod 766 -R $http_dir
+sudo chmod 755 -R $http_dir
 sudo ls -l $http_dir/bootstrap.ign
 
 echo "Create the append-boottrap.ign.."
