@@ -5,7 +5,7 @@ do
 
   # VM name on vCenter 
   # Ex: VMname is a DNS record
-  # vmname_prefix="odf0"
+  # vmname_prefix="worker0"
   # vmname_suffix=".${OCP_DOMAIN}"
   # vmname="${vmname_prefix}${i}${vmname_suffix}"
   
