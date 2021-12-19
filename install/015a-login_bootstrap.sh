@@ -1,1 +1,1 @@
-ssh -i $ssh_public_key_file bootstrap.${OCP_DOMAIN}
+ssh -i ~/.ssh/$ssh_public_key bootstrap.${OCP_DOMAIN}
