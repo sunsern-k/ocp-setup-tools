@@ -2,7 +2,7 @@ is_vm=$1
 
 if [ "$is_vm" = "vm" ] || [ "$is_vm" = "VM" ]
 then
-  for i in $(seq -s' ' $master_count
+  for i in $(seq -s' ' $master_count)
   do
     # DNS record
     vmfqdn="master0"${i}.${OCP_DOMAIN}
