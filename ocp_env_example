@@ -13,7 +13,7 @@ vcenterdatastore="__VCENTERDATASTORE__"
 vcenterfolder="/$vcenterdatacenter/vm/__VCENTERFOLDER__"
 #
 helper="__helper_IP_ADDRESS__"
-bastion_host="__bastion_hostname__"
+bastionhost="__bastion_hostname__"
 
 ocpmajorversion="4.9"
 ocpversion="4.9.7"
@@ -61,7 +61,7 @@ start_infra_int=""
 total_infra_count=$(($infra_int_count + $infra_mon_count + $infra_mgt_count ))
 
 export dnsserver basedomain clustername workercount 
-export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastion_host
+export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastionhost
 export ocpmajorversion ocpversion podcidr machinecidr servicecidr ntpserver hostprefix sdn_mtu
 export httpproxy httpsproxy noproxy 
 export pullsecret_file pullsecret 
