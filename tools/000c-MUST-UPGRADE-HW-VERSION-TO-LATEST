@@ -1,0 +1,11 @@
+# The rhcos comes with VMWare Hardware version 13, so it is required to upgrade to the latest
+# Otherwise it will show a Warning below after the cluster installation and it won't be convenient
+# to shutdown each VM and upgrade the hardware version.
+#
+# The cluster is using VMs with hardware version lower than 15, which is being deprecated by
+# Openshift. Hardware version 15 or greater is required by vSphere CSI driver. Please update your
+# VMs t o at least HW version 15.
+
+# Covert a template to be a vm and it can be upgraded by:
+# govc vm.upgrade -vm /$vcenterdatacenter/vm/$clustername/<template-vm-name>
+

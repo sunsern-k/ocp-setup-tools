@@ -3,3 +3,5 @@ Add common parameters into the first template
     - guestinfo.ignition.config.data.encoding : base64
     - guestinfo.ignition.config.data : (bootstrap - append-bootstrap.64, master - base64-encoded master.64, worker/infra/odf - based64-encoded worker.64) 
     - guestinfo.afterburn.initrd.network-kargs : ip=<IP_NODE>::<GW>:<NETMASK>:<hostname FQDN>:ens192:none nameserver=<DNS>
+
+**NOTE: See all template management tools in the "tools"***
