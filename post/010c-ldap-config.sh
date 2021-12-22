@@ -26,7 +26,7 @@ spec:
       ca: 
         name: ca-config-map
       insecure: true 
-      url: "ldaps://$ldap_server/$ldap_query_string" 
+      url: "$ldap_server/$ldap_query_string" 
 END
 
 echo "Applying LDAP configurations: ${OCP_DIR}/ldap-idp.yaml..."

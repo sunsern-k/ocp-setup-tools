@@ -54,7 +54,7 @@ etcd_backup_cronjob="ocp-etcd-backup-cronjob.yaml"
 
 # LDAP
 export ldap_project="ldap-sync"
-export ldap_server="https://<ldap_server>:<port>"
+export ldap_server="ldap://<ldap_server>:<port>"
 export binddn="cn=xxx,ou=xxxx,dc=xx,dc=xx,dc=xxx"
 export ldap_query_string='dc=xx,dc=xx,dc=xx?uid'
 export bind_password="xxxxx"
