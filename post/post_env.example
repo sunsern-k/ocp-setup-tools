@@ -57,6 +57,7 @@ export ldap_project="ldap-sync"
 export ldap_server="https://<ldap_server>:<port>"
 export binddn="cn=xxx,ou=xxxx,dc=xx,dc=xx,dc=xxx"
 export ldap_query_string='dc=xx,dc=xx,dc=xx?uid'
+export bind_password="xxxxx"
 
 export logging_node_selector logging_storageclass logging_storage_size logging_config
 export registry_node_selector registry_pvc_config registry_storage_mode registry_storage_size registry_storageclass

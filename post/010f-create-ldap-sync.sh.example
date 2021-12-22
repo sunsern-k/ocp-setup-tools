@@ -21,10 +21,11 @@ augmentedActiveDirectory:
         derefAliases: never
         filter: (objectclass=person)
         pageSize: 0
-    userNameAttributes: [ mail ] 
+    userNameAttributes: [ cn ] 
     groupMembershipAttributes: [ memberOf ] 
 END
 
+# Need to add a a list of groups here first.
 echo "Creating a whitelist file. "
 cat <<END > ${OCP_DIR}/whitelist.txt
 CN=xxx,OU=XXX,DC=xxx,DC=xxx
@@ -33,7 +34,6 @@ END
 
 echo "Creating a Secret for ldap-sync and whitelist..."
 oc create secret generic ldap-sync --from-file=ldap-sync.yaml=${OCP_DIR}/ldap-sync.yaml --from-file=whitelist.txt=${OCP_DIR}/whitelist.txt
-
 
 echo "Creating the LDAP Cronjob..."
 cat <<END > ${OCP_DIR}/ldap-cronjob.yaml
@@ -72,3 +72,7 @@ spec:
               defaultMode: 420
               secretName: ldap-sync
 END
+
+echo "Creating the ldap-cronjob..."
+echo oc apply -f  ${OCP_DIR}/ldap-cronjob.yaml
+oc apply -f  ${OCP_DIR}/ldap-cronjob.yaml
