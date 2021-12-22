@@ -82,3 +82,13 @@ else
   echo "oc create -f $etcd_backup_cronjob"
   oc apply -f $etcd_backup_cronjob
 fi
+
+# Attempting to test the backup script. 
+echo "Creating the backup-test..."
+oc create job backup-test --from=cronjob/openshift-backup
+echo "Monitoring the backup-test job for a minute..."
+for i in seq -s' ' 30
+do
+  oc get pods -n $etcd_backup_project
+  sleep 2
+done
