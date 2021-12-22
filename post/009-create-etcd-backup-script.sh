@@ -67,6 +67,11 @@ END
 echo "oc create -f ${OCP_POST}/$etcd_backup_clusterrolebinding"
 oc apply -f ${OCP_POST}/$etcd_backup_clusterrolebinding
 
+# Assign Service Account with Special Privileges
+echo "Granting a service account openshift-backup with special privileges..."
+echo "oc adm policy add-scc-to-user privileged -z openshift-backup"
+oc adm policy add-scc-to-user privileged -z openshift-backup
+
 # Create etcd backup cron job
 if [ ! -f $etcd_backup_cronjob ]
 then 
