@@ -58,7 +58,7 @@ infra_mgt_count=0
 odf_count=3
 # If the Infra int is starting from infra04.<domain> infra05.<domain> then set start_infra_int=4
 start_infra_int=""
-total_infra_count=$(($infra_int_count + $infra_mon_count + $infra_mgt_count ))
+total_infra_count=$(($infra_int_count + $infra_mgt_count ))
 
 export dnsserver basedomain clustername workercount 
 export vcenter vcenteruser vcenterpassword vcenterdatacenter vcenterhost vcenterdatastore vcenterfolder helper bastionhost
