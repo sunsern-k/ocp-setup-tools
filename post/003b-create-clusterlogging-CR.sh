@@ -67,8 +67,8 @@ spec:
       fluentd: 
         tolerations:
         - key: infra 
-        value: reserved
-        effect: NoSchedule
+          value: reserved
+          effect: NoSchedule
         - key: infra 
           value: reserved
           effect: NoExecute  
