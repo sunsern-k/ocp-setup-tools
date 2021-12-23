@@ -19,12 +19,10 @@ spec:
         name: 
         - givenName
         preferredUsername: 
-        - sAMAccountName
+        - cn
       bindDN: "$binddn" 
       bindPassword: 
         name: ldap-secret
-      ca: 
-        name: ca-config-map
       insecure: true 
       url: "$ldap_server/$ldap_query_string" 
 END
